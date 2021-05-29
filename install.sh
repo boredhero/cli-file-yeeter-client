@@ -34,8 +34,9 @@ function get_yeet_command {
 
 function install_yeet {
     mkdir -p ~/.yeet
-    cd ~/.yeet
-    curl -O 
+    touch ~/.yeet/yeet.sh
+    echo "#!/bin/bash" > ~/.yeet/yeet.sh
+    echo "curl -F file=\$1 $server_ip" > ~/.yeet/yeet.sh
 }
 
 get_server_ip
