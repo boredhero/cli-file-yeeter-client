@@ -60,3 +60,4 @@ get_server_ip
 clear
 get_yeet_command
 get_shell_type
+install_yeet
