@@ -62,13 +62,15 @@ function make_uninstall_yeet {
     touch ~/.yeet/yeet_uninstall.sh
     echo '#!/bin/bash' >> ~/.yeet/yeet_uninstall.sh
     echo 'rm -rf ~/.yeet' >> ~/.yeet/yeet_uninstall.sh
+    echo 'echo -e "Please remove the alias commands from your rc files manually"' >> ~/.yeet/yeet_uninstall.sh
     echo "alias $yeet_command-uninstall='~/.yeet/./yeet_uninstall.sh'" >> ~/$shell_type
     chmod +x ~/.yeet/yeet_uninstall.sh
+    echo -e "If ever you wish to uninstall yeet, simply type $yeet_command-uninstall"
 }
-
 
 get_server_ip
 clear
 get_yeet_command
 get_shell_type
 install_yeet
+make_uninstall_yeet
