@@ -52,9 +52,20 @@ function install_yeet {
     touch ~/.yeet/yeet.sh
     echo '#!/bin/bash' >> ~/.yeet/yeet.sh
     echo "curl -F file=@\$1 $server_ip" >> ~/.yeet/yeet.sh
-    echo "alias $yeet_cmd='~/.yeet/yeet.sh'" >> ~/$shell_type
-    echo -e "Yeet installed to ~/.yeet/yeet.sh with the command $yeet_cmd and the server $server_ip
+    echo "alias $yeet_cmd='~/.yeet/./yeet.sh'" >> ~/$shell_type
+    chmod +x ~/.yeet/yeet.sh
+    echo -e "Yeet installed to ~/.yeet/yeet.sh with the command $yeet_cmd and the server $server_ip"
+
 }
+
+function make_uninstall_yeet {
+    touch ~/.yeet/yeet_uninstall.sh
+    echo '#!/bin/bash' >> ~/.yeet/yeet_uninstall.sh
+    echo 'rm -rf ~/.yeet' >> ~/.yeet/yeet_uninstall.sh
+    echo "alias $yeet_command-uninstall='~/.yeet/./yeet_uninstall.sh'" >> ~/$shell_type
+    chmod +x ~/.yeet/yeet_uninstall.sh
+}
+
 
 get_server_ip
 clear
