@@ -26,20 +26,37 @@ function get_yeet_command {
         clear
         get_yeet_command
     else if (($yeet_cmd_check != 1)); then
-        echo -e "Your input was not a 1 or 0, please try again!"
+        echo -e "Your input ($yeet_cmd_check) was not a 1 or 0, please try again!"
         clear
         get_yeet_command
+    fi
+}
+
+function get_shell_type {
+    echo -e "Please let us know what your default shell is. 1 - ZSH, 0 - BASH"
+    read shell_type
+    shell_rc=""
+    if (($shell_type == 0)); then
+        shell_rc=".bashrc"
+    else if (($shell_type == 1)); then
+        shell_rc=".zshrc"
+    else
+        echo -e "Your input ($shell_type) was not a 1 or 0, please try again!"
+        clear
+        get_shell_type
     fi
 }
 
 function install_yeet {
     mkdir -p ~/.yeet
     touch ~/.yeet/yeet.sh
-    echo "#!/bin/bash" > ~/.yeet/yeet.sh
-    echo "curl -F file=\$1 $server_ip" > ~/.yeet/yeet.sh
+    echo '#!/bin/bash' >> ~/.yeet/yeet.sh
+    echo "curl -F file=@\$1 $server_ip" >> ~/.yeet/yeet.sh
+    echo "alias $yeet_cmd='~/.yeet/yeet.sh'" >> ~/$shell_type
+    echo -e "Yeet installed to ~/.yeet/yeet.sh with the command $yeet_cmd and the server $server_ip
 }
 
 get_server_ip
 clear
 get_yeet_command
-echo -e "We will now attempt to install yeet!"
+get_shell_type
